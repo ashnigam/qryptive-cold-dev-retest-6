@@ -24,6 +24,7 @@ concurrency:
 
 permissions:
   contents: read
+  security-events: write
 
 jobs:
   pqc-scan:
@@ -40,11 +41,9 @@ jobs:
           fail_on_vulnerable: "false"   # set to "true" to fail the build on findings
           severity_threshold: medium
           scan_scope: auto              # changed files on pull requests, the whole repo otherwise
-          report_format: json
+          report_format: sarif
 
-      - name: Keep the scan report
-        if: always() && hashFiles('qryptive-scan-report.json') != ''
-        uses: actions/upload-artifact@v7
+      - uses: github/codeql-action/upload-sarif@v4
+        if: always()
         with:
-          name: qryptive-scan-report
-          path: qryptive-scan-report.json
+          sarif_file: pqc-results.sarif
