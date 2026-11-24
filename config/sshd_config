@@ -1,0 +1,5 @@
+Protocol 2
+KexAlgorithms diffie-hellman-group1-sha1,curve25519-sha256
+Ciphers aes128-cbc,3des-cbc,aes256-gcm@openssh.com
+MACs hmac-md5,hmac-sha2-256
+HostKey /etc/ssh/ssh_host_rsa_key
